@@ -6,9 +6,10 @@
 
 
 ## 環境構築と実行方法
-1.dd
+1.データの配置
 
-2.dd
+2.conda環境への切り替え
+`conda activate dinov2`
 
 3.dd
 
