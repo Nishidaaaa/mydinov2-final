@@ -8,13 +8,13 @@
 # 環境構築と実行方法
 1. データの配置
     - `git clone このリポジトリ`
-    - 画像データを配置()
+    - 画像データを用意(ここでは../dataset以下に配置)
 
 2. conda環境の利用
 
     `conda activate dinov2`
 
-3. 画像を分割
+3. 画像を分割して保存
 
     `python split_and_save.py`
 
