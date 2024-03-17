@@ -6,19 +6,36 @@
 
 
 ## 環境構築と実行方法
+# 環境構築と実行方法
 1. データの配置
+    - `git clone このリポジトリ`
+    - 画像データを`./dataset/`以下に配置
+2. Docker build
 
-  - `git clone このリポジトリ`
+    `make docker-build`
 
-  - 画像データを用意
+3. Docker run
 
-2. conda環境への切り替え
 
-&emsp; `conda activate dinov2`
+    `make docker-run`
 
-3. dd
+---以下コンテナの中---
 
-4. dd
+
+4. mlflowのUIサーバー立ち上げ
+
+
+    `nohup mlflow ui --port 5000 -h 0.0.0.0 & `
+
+
+5. 訓練実行
+
+    `python run_all.py`
+
+6. 実験結果確認
+
+    [localhost:5000](http://localhost:5000)
+
 ## はじめに
 
 このセクションでは、プロジェクトの簡単な概要を提供します。プロジェクトの目的や存在意義、誰が利用するのかについて説明します。
