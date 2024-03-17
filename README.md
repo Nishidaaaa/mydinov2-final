@@ -39,15 +39,16 @@
 
 4. 分割画像(パッチ)から特徴量を抽出
 
+    - CTS.txtでプログラムを実行するフォルダや分割画像データのパスを指定
 
     - `bash run_script/CTS.txt `
 
 
-5. 画像分類の訓練実行
+6. 画像分類の訓練実行
 
-    `python train_and_val.py`
+    - `python train_and_val.py`
 
-6. 画像分類のテスト実行
+7. 画像分類のテスト実行
 
    `python test.py`
 
