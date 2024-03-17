@@ -10,7 +10,7 @@
 
 2. conda環境への切り替え
 
-&emsp `conda activate dinov2`
+&emsp; `conda activate dinov2`
 
 3. dd
 
