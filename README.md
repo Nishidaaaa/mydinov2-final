@@ -9,14 +9,14 @@
 1. データの配置
     - `git clone このリポジトリ`
     - 画像データを配置()
+
 2. conda環境の利用
 
     `conda activate dinov2`
 
-3. Docker run
+3. 画像を分割
 
-
-    `make docker-run`
+    `python split_and_save.py`
 
 ---以下コンテナの中---
 
