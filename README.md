@@ -5,14 +5,13 @@
 
 
 
-## 環境構築と実行方法
 # 環境構築と実行方法
 1. データの配置
     - `git clone このリポジトリ`
-    - 画像データを`./dataset/`以下に配置
-2. Docker build
+    - 画像データを配置()
+2. conda環境の利用
 
-    `make docker-build`
+    `conda activate dinov2`
 
 3. Docker run
 
