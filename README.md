@@ -8,7 +8,7 @@
 # 環境構築と実行方法
 1. データの配置
     - `git clone このリポジトリ`
-    - 画像データを用意 (ここでは../dataset以下に配置)
+    - 画像データを用意 (例として../dataset以下にCTS画像を配置)
 
 2. conda環境の利用
 
@@ -18,13 +18,10 @@
 
     `python split_and_save.py`
 
----以下コンテナの中---
+4. 分割画像(パッチ)から特徴量を抽出
 
 
-4. mlflowのUIサーバー立ち上げ
-
-
-    `nohup mlflow ui --port 5000 -h 0.0.0.0 & `
+    `bash run_script/ `
 
 
 5. 訓練実行
