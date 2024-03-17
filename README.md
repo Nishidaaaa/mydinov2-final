@@ -22,12 +22,12 @@
 4. 分割画像(パッチ)から特徴量を抽出
 
 
-    `bash run_scriptCTS.txt `
+    `bash run_script/CTS.txt `
 
 
 5. 訓練実行
 
-    `python run_all.py`
+    `python train_and_val.py`
 
 6. 実験結果確認
 
