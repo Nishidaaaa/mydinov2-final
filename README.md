@@ -5,6 +5,20 @@
 
 画像を任意の大きさに分割　→　分割画像から特徴量を抽出　→　それを基に画像を分類
 
+# データの準備
+
+画像データの配置は次のようにします
+
+- `<ROOT>/train/0/0_1.jpeg`
+- `<ROOT>/train/[...]`
+- `<ROOT>/train/1/1_81.jpeg`
+- `<ROOT>/val/val_00000001.jpeg`
+- `<ROOT>/val/[...]`
+- `<ROOT>/val/val_00000060.jpeg`
+- `<ROOT>/test/test_00000001.jpeg`
+- `<ROOT>/test/[...]`
+- `<ROOT>/test/test_00000090.jpeg`
+
 
 # 環境構築と実行方法
 
