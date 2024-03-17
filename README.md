@@ -33,14 +33,14 @@
 
 3. 画像を分割して保存
 
-    split_and_save.pyで画像データのパスや画像分割サイズを指定
+    - split_and_save.pyで画像データのパスや画像分割サイズを指定
     
-    `python split_and_save.py`
+    - `python split_and_save.py`
 
 4. 分割画像(パッチ)から特徴量を抽出
 
 
-    `bash run_script/CTS.txt `
+    - `bash run_script/CTS.txt `
 
 
 5. 画像分類の訓練実行
