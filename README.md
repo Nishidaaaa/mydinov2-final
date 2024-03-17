@@ -18,7 +18,7 @@
 - `<ROOT>/test/test_00000001.jpeg`
 - `<ROOT>/test/[...]`
 - `<ROOT>/test/test_00000090.jpeg`
-
+- `<ROOT>/labels.txt`
 
 # 環境構築と実行方法
 
