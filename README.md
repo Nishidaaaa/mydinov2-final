@@ -46,11 +46,11 @@
 
 6. 画像分類の訓練実行
 
-    - `python train_and_val.py`
+    `python train_and_val.py`
 
 7. 画像分類のテスト実行
 
-   `python test.py`
+    `python test.py`
 
 # 設定
 
