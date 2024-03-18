@@ -38,6 +38,7 @@ test_00000090.jpg,1
 
 2. conda環境の利用
     - condaをインストールする
+    - conda env create -f conda.yaml
     - `conda activate dinov2`
 
 3. 画像を分割して保存
