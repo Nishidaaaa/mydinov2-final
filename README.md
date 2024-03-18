@@ -67,7 +67,7 @@
 
 # 引用
 
-[diNOv2公式Github]([https://www.sejuku.net/blog/](https://github.com/facebookresearch/dinov2))
+[diNOv2公式Github](https://github.com/facebookresearch/dinov2)
 
 
 ## 特徴
