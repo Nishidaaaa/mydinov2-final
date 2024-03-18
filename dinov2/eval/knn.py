@@ -268,21 +268,24 @@ def eval_knn(
     
     logger.info("Extracting features ...")
     
+    feature_folder = "features"
+    if not os.path.exists(feature_folder):
+        os.makedirs(feature_folder)
 
-    # train_features, train_labels, train_fullpaths = extract_features(model, train_dataset, batch_size, num_workers, gather_on_cpu=gather_on_cpu)
-    # torch.save(train_features, 'train_features.pt')
-    # torch.save(train_labels, 'train_labels.pt')
-    # torch.save(train_fullpaths, 'train_fullpaths.pt')
+    train_features, train_labels, train_fullpaths = extract_features(model, train_dataset, batch_size, num_workers, gather_on_cpu=gather_on_cpu)
+    torch.save(train_features, f"{feature_folder}/train_features.pt")
+    torch.save(train_labels, f"{feature_folder}/train_labels.pt")
+    torch.save(train_fullpaths, f"{feature_folder}/train_fullpaths.pt")
     
     val_features, val_labels, val_fullpaths = extract_features(model, val_dataset, batch_size, num_workers, gather_on_cpu=gather_on_cpu) 
-    torch.save(val_features, 'val_features.pt')
-    torch.save(val_labels, 'val_labels.pt')
-    torch.save(val_fullpaths, 'val_fullpaths.pt')
+    torch.save(val_features, f"{feature_folder}/val_features.pt")
+    torch.save(val_labels, f"{feature_folder}/val_labels.pt")
+    torch.save(val_fullpaths, f"{feature_folder}/val_fullpaths.pt")
     
     test_features, test_labels, test_fullpaths = extract_features(model, test_dataset, batch_size, num_workers, gather_on_cpu=gather_on_cpu) 
-    torch.save(test_features, 'test_features.pt')
-    torch.save(test_labels, 'test_labels.pt')
-    torch.save(test_fullpaths, 'test_fullpaths.pt')
+    torch.save(test_features, f'{feature_folder}/test_features.pt')
+    torch.save(test_labels, f'{feature_folder}/test_labels.pt')
+    torch.save(test_fullpaths, f'{feature_folder}/test_fullpaths.pt')
     
 
 def eval_knn_with_model(
