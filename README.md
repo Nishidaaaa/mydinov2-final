@@ -19,6 +19,14 @@
 - `<ROOT>/test/test_00000090.jpeg`
 - `<ROOT>/labels.txt`
 
+テストデータの正解ラベルを
+
+'''
+Filename,Label
+test_00000001.jpg,0
+test_00000002.jpg,0
+'''
+
 # 環境構築と実行方法
 
 1. データの配置
@@ -38,7 +46,7 @@
 
 4. 分割画像(パッチ)から特徴量を抽出
 
-    - dinov2/data/datasets/image_net.pyの_Splitクラスでlength関数に分割後の画像枚数を入力
+    - dinov2/data/datasets/image_net.pyの_Splitクラス内のlength関数に分割後の画像枚数を入力
       
     - CTS.txtでプログラムを実行するフォルダや分割画像データのパスを指定
 
@@ -46,10 +54,10 @@
 
 
 6. 画像分類の訓練実行
+    
+    - `python train_and_val.py`
 
-    `python train_and_val.py`
-
-7. 画像分類のテスト実行
+8. 画像分類のテスト実行
 
     `python test.py`
 
