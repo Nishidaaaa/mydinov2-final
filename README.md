@@ -19,12 +19,15 @@
 - `<ROOT>/test/test_00000090.jpeg`
 - `<ROOT>/labels.txt`
 
-テストデータの正解ラベルを
+以下のような,テストデータのファイル名と正解ラベルの対応を表すcsvファイルを用意する。
 
 ```
 Filename,Label
 test_00000001.jpg,0
 test_00000002.jpg,0
+...
+test_00000089.jpg,1
+test_00000090.jpg,1
 ```
 
 # 環境構築と実行方法
