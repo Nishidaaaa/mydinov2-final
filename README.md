@@ -58,15 +58,17 @@ test_00000090.jpg,1
 
 6. 画像分類の訓練実行
     
-    - `python train_and_val.py`
+    `python train_and_val.py`
 
 8. 画像分類のテスト実行
 
-    `python test.py`
+    - test.pyでテストデータのラベルを表したcsvファイルのパスを指定
+
+    - `python test.py`
 
 # 設定
 
-- split_and_save.pyで画像データのパスや画像分割サイズを指定してください
+- kMeansの
 
 - CTS.txtではプログラムを実行するフォルダやデータのパスを
 
