@@ -29,22 +29,16 @@ from module import  make_cluster_bar, make_histgrams,sort_cluster,restore_images
 
 experiment = mlflow.set_experiment('Path_clustering')
 
-# pt_folder = "pathmnist_x252_pt"
-# reconstructed_folder = "CTS_reconstructed"
+# n_clusters = 16
 # json_folder = "../pathmnist/pathmnist_x252_json"
 # output = "pathmnist_x252_result"
-# experiment = mlflow.set_experiment('path_clustering')
-
-# n_clusters = 16
-# pt_folder = "CTS_100_pt"
-# json_folder = "../pathmnist/CTS_100_json"
-# output = f"finaldata/CTS_100/no_pca/{n_clusters}"
-# CTS = True
+# feature_folder = "pathmnist_x252_pt"
+# CTS = False
 
 n_clusters = 16
-pt_folder = "CTS_100_pt"
-json_folder = "../pathmnist/CTS_100_json"
-output = f"finaldata/CTS_100/no_pca/{n_clusters}"
+json_folder = "/a/n-nishida/dataset/CTS_json"
+output = "CTS_result"
+feature_folder = "features"
 CTS = True
 
 with mlflow.start_run(experiment_id=experiment.experiment_id):
@@ -53,15 +47,13 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
         os.makedirs(output)
     
     #特徴量をtensorからnumpyに 
-    train_features = torch.load(f"{pt_folder}/train_features.pt").detach().cpu().numpy()
-    train_labels = torch.load(f"{pt_folder}/train_labels.pt").detach().cpu().numpy()
-    train_fullpaths = torch.load(f"{pt_folder}/train_fullpaths.pt")
-    val_features = torch.load(f"{pt_folder}/val_features.pt").detach().cpu().numpy()
-    val_labels = torch.load(f"{pt_folder}/val_labels.pt").detach().cpu().numpy()
-    val_fullpaths = torch.load(f"{pt_folder}/val_fullpaths.pt")
-    test_features = torch.load(f"{pt_folder}/test_features.pt").detach().cpu().numpy()
-    # test_labels = torch.load(f"{pt_folder}/test_labels.pt").detach().cpu().numpy()
-    test_fullpaths = torch.load(f"{pt_folder}/test_fullpaths.pt")
+    train_features = torch.load(f"{feature_folder}/train_features.pt").detach().cpu().numpy()
+    train_labels = torch.load(f"{feature_folder}/train_labels.pt").detach().cpu().numpy()
+    train_fullpaths = torch.load(f"{feature_folder}/train_fullpaths.pt")
+    val_features = torch.load(f"{feature_folder}/val_features.pt").detach().cpu().numpy()
+    val_labels = torch.load(f"{feature_folder}/val_labels.pt").detach().cpu().numpy()
+    val_fullpaths = torch.load(f"{feature_folder}/val_fullpaths.pt")
+    
     
     concatenated_features = np.concatenate((train_features, val_features), axis=0)
     concatenated_features = preprocessing.normalize(concatenated_features)
@@ -69,7 +61,6 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     pca_full = PCA()
     pca_full.fit(concatenated_features)
     explained_variance_ratio = pca_full.explained_variance_ratio_
-    #print("Explained Variance Ratio:", explained_variance_ratio)
 
     # 累積寄与率の計算
     cumulative_variance_ratio = np.cumsum(pca_full.explained_variance_ratio_)
@@ -79,10 +70,10 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     
     print(f"累積寄与率が80%になる主成分の数: {num_components}")
     
-    # pca = PCA(n_components=num_components)
-    # concatenated_features = pca.fit_transform(concatenated_features)
-    # print('pca done')
-    # joblib.dump(pca.components_, f"{output}/projection_matrix.joblib")
+    pca = PCA(n_components=num_components)
+    concatenated_features = pca.fit_transform(concatenated_features)
+    print('pca done')
+    joblib.dump(pca.components_, f"{output}/projection_matrix.joblib")
 
     #kmeansでクラスタリング
     print('kmeans training ...')
@@ -182,7 +173,7 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     # ハイパーパラメータの範囲を指定
     grid = {
         'n_estimators': [100, 200, 300],  # 生成する決定木の数
-        'max_features': ['auto', 'sqrt', 'log2'],  # 最大の特徴量数
+        'max_features': ['sqrt', 'log2'],  # 最大の特徴量数
         'max_depth': [10, 20, 30, None],  # 木の深さ
         'min_samples_split': [2, 5, 10],  # 内部ノードを分割するための最小サンプル数
         'min_samples_leaf': [1, 2, 4],  # 葉の最小サンプル数
@@ -193,7 +184,7 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     with open(f'{output}/parameter_grid.json', 'w') as f:
         json.dump(grid, f)
     # グリッドサーチの設定
-    grid_search = GridSearchCV(estimator=rf_model, param_grid=grid, cv=5, n_jobs=-1)
+    grid_search = GridSearchCV(estimator=rf_model, param_grid=grid, cv=5, n_jobs=-1,error_score='raise')
 
     data_hist = train_histgrams + val_histgrams
     data_label = original_train_labels + original_val_labels
@@ -216,21 +207,6 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     val_accuracy = accuracy_score(original_val_labels, val_pred)
     # print("val Accuracy:", val_accuracy)
     print(f'{bestParam}のときに正答率が最高で{bestScore}')
-    
-    data_pred = best_model.predict(data_hist)
-    
-    fig, ax = plt.subplots()
-    conf_matrix = confusion_matrix(data_label, data_pred)
-    # seabornを使用してヒートマップを描画
-    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', cbar=False,
-                xticklabels=np.unique(original_val_labels), yticklabels=np.unique(val_pred))
-    plt.title(f"dinov2 result {round(bestScore, 3)}")
-    plt.xlabel('pred')
-    plt.ylabel('labels')
-
-    # 保存する場合
-
-    plt.savefig(f"{output}/dinov2_matrix.png")
 
     
     fig, ax = plt.subplots()
@@ -243,7 +219,6 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     plt.title(f"dinov2 val result {round(val_accuracy, 3)}")
     plt.xlabel('val_pred')
     plt.ylabel('val_labels')
-
     # 保存する場合
     plt.savefig(f"{output}/dinov2_matrix_val.png")
 
@@ -257,7 +232,6 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     plt.title(f"dinov2 train result {round(train_accuracy, 3)}")
     plt.xlabel('train_pred')
     plt.ylabel('train_labels')
-
     # 保存する場合
     plt.savefig(f"{output}/dinov2_matrix_train.png")
     
