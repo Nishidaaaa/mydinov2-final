@@ -25,36 +25,31 @@ import csv
 
 from sklearn.metrics import confusion_matrix
 
-from module import  make_cluster_bar, make_histgrams,find_label_in_csv,restore_images_from_json
+from module import  make_cluster_bar, make_histgrams,find_label_in_csv,restore_images_from_json 
 
-# pt_folder = "pathmnist_x252_pt"
-# #reconstructed_folder = "CTS_reconstructed"
+# n_clusters = 16
 # json_folder = "../pathmnist/pathmnist_x252_json"
 # output = "pathmnist_x252_result"
-# csv_filename = '../pathmnist/pathmnist_test_label.csv'  
+# feature_folder = "features"
+# CTS = False 
+# test_label_csv = '../pathmnist/pathmnist_test_label.csv' 
 
-# pt_folder = "CTS_100_pt"
-# json_folder = "../pathmnist/CTS_100_json"
-# output = "try_CTS_100_pca_result"
-# test_label_csv = '../pathmnist/CTS_100_test_label.csv'  
-# CTS = True
-# n_clusters = 16
-n_clusters = 10
-pt_folder = "CTS_100_pt"
-json_folder = "../pathmnist/CTS_100_json"
-output = f"finaldata/CTS_100/{n_clusters}"
+n_clusters = 16
+json_folder = "/a/n-nishida/dataset/CTS_json"
+output = "CTS_result"
+feature_folder = "features"
 CTS = True
-test_label_csv = '../pathmnist/CTS_100_test_label.csv'  
+test_label_csv = "/a/n-nishida/dataset/CTS_test_label.csv"  
 
-test_features = torch.load(f"{pt_folder}/test_features.pt").detach().cpu().numpy()
-test_fullpaths = torch.load(f"{pt_folder}/test_fullpaths.pt")
+
+test_features = torch.load(f"{feature_folder}/test_features.pt").detach().cpu().numpy()
+test_fullpaths = torch.load(f"{feature_folder}/test_fullpaths.pt")
+
 
 test_features = preprocessing.normalize(test_features)
-# pca = joblib.load(f"{output}/pca_model.joblib")
-# pca_X = pca.fit_transform(X)
 
 saved_projection_matrix = joblib.load(f"{output}/projection_matrix.joblib")
-# 新しいデータに対して射影行列を適用して次元削減
+# テストデータに対して射影行列を適用して次元削減
 test_features = np.dot(test_features, saved_projection_matrix.T)
 
 model = joblib.load(f"{output}/kmeans_model.joblib")
@@ -122,9 +117,9 @@ plt.savefig(f"{output}/dinov2_matrix_test.png")
 if(CTS):
     print("heatmap making ...")
     # 画像の保存先フォルダ
-    heatmap_train_folder = f"{output}/heatmaps/test"  # 保存先フォルダのパスを指定してください
+    heatmap_test_folder = f"{output}/heatmaps/test"  # 保存先フォルダのパスを指定してください
     # 画像を復元
-    restore_images_from_json(test_json_with_cluster, heatmap_train_folder, n_clusters)
+    restore_images_from_json(test_json_with_cluster, heatmap_test_folder, n_clusters)
 
 else:
     print("done")
