@@ -34,7 +34,6 @@ test_00000090.jpg,1
 
 1. データの配置
     - `git clone このリポジトリ`
-    - 画像データを配置 (例として../dataset以下にCTS画像データを配置)
     - DINOv2の公式Githubで紹介されている事前訓練済みのdinov2モデルをダウンロードし,pretrained_weights以下に配置
 
 2. conda環境の利用
