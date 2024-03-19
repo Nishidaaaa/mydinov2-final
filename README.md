@@ -55,7 +55,7 @@ test_00000090.jpg,1
       
     - CTS.txtでプログラムを実行するフォルダや分割画像データのパスを指定
 
-    - `bash run_script/CTS.txt `
+    - `bash run_script/CTS.sh `
 
 
 6. 画像分類の訓練実行
