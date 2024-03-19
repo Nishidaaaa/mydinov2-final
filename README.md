@@ -36,7 +36,6 @@ test_00000090.jpg,1
     - `git clone このリポジトリ`
     - DINOv2の公式Githubで紹介されている事前訓練済みのdinov2モデルをダウンロードし,pretrained_weights以下に配置
 
-    ああああ
 
 2. conda環境の利用
    
@@ -48,21 +47,28 @@ test_00000090.jpg,1
     - split_and_save.pyで画像データのパスや画像分割サイズを指定
     
     - `python split_and_save.py`
+  
+    分割画像を
 
 4. 分割画像(パッチ)から特徴量を抽出
 
+    分割画像を入力し、特徴量を抽出します
     - dinov2/data/datasets/image_net.pyの_Splitクラス内のlength関数に分割後の画像枚数を入力
       
     - CTS.txtでプログラムを実行するフォルダや分割画像データのパスを指定
 
     - `bash run_script/CTS.sh `
-
-
-6. 画像分類の訓練実行
     
-    `python train_and_val.py`
+    train,val,testデータそれぞれに対して特徴量、パス、ラベルのptファイルが出力されます
+    
 
-8. 画像分類のテスト実行
+5. 画像分類の訓練実行
+
+   4から得られたptファイルを入力し、分類器を訓練します
+    -`python train_and_val.py`
+   
+
+7. 画像分類のテスト実行
 
     - test.pyでテストデータのラベルを表したcsvファイルのパスを指定
 
