@@ -36,7 +36,7 @@ test_00000090.jpg,1
     - `git clone このリポジトリ`
     - DINOv2の公式Githubで紹介されている事前訓練済みのdinov2モデルをダウンロードし,pretrained_weights以下に配置
 
-ああああ
+    ああああ
 
 2. conda環境の利用
     - condaをインストールする
