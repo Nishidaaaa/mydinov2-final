@@ -39,7 +39,7 @@ test_00000090.jpg,1
     ああああ
 
 2. conda環境の利用
-    - condaをインストールする
+   
     - `conda env create -f conda.yaml`
     - `conda activate dinov2`
 
@@ -69,6 +69,7 @@ test_00000090.jpg,1
     - `python test.py`
 
 # 設定や注意
+- Anacondaは2023年9月リリースのバージョンを用いています
 
 - image_net.pyにおいて,画像データはjpgファイルをデフォルト(63行目)にしています
 
@@ -81,6 +82,8 @@ test_00000090.jpg,1
 - 一部のpythonパッケージはconda環境の外でインストールしたためバージョンが異なる場合があります
 
 - 本ページのdinov2のプログラムは公式Githubからcloneしたものを選抜して書き換えたものです
+
+  
 
 # おわりに
 
