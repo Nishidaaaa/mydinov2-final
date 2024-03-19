@@ -47,14 +47,14 @@ test_00000090.jpg,1
     - split_and_save.pyで画像データのパスや画像分割サイズを指定
     - `python split_and_save.py`
   
-    分割画像に加え,その位置情報を表すjsonファイル,クラスidなどを表すnpyファイルが出力されます
+    分割画像に加え,その位置情報を示すjsonファイル,クラスidなどを示すnpyファイルが出力されます
 
 4. 特徴量の抽出
 
     分割画像を入力し、特徴量を抽出します
     
     - dinov2/data/datasets/image_net.pyの_Splitクラス内のlength関数に分割後の画像枚数を入力
-    - CTS.txtでプログラムを実行するフォルダや分割画像データのパスを指定
+    - run_script/CTS.shでプログラムを実行するフォルダや分割画像データのパスを指定
     - `bash run_script/CTS.sh `
     
     train,val,testデータそれぞれに対して特徴量,パス,ラベルのptファイルが出力されます
