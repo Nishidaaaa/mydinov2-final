@@ -64,12 +64,14 @@ test_00000090.jpg,1
 
    4で得られたptファイルを入力し、分類器を訓練します
 
-   -`python train_and_val.py`
+   - `python train_and_val.py`
 
    訓練後のモデルはrandom_forest_model.joblibとして保存されます
 
 6. 画像分類のテスト実行
 
+    訓練した分類器をテストします
+   
     - test.pyでテストデータのラベルを表したcsvファイルのパスを指定
     - `python test.py`
 
